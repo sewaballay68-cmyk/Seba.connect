@@ -1,0 +1,843 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>SeBa.sl - Create Account</title>
+
+    <!-- Supabase -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="supabase.js"></script>
+
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background: #f3f5f7;
+            min-height: 100vh;
+        }
+
+
+        /* HEADER */
+
+        header {
+            background: #b30000;
+            color: white;
+            padding: 15px;
+        }
+
+        .header-content {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .logo {
+            font-size: 26px;
+            font-weight: bold;
+        }
+
+        .menu-button {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 28px;
+            cursor: pointer;
+        }
+
+        nav {
+            display: none;
+            margin-top: 15px;
+        }
+
+        nav a {
+            display: block;
+            padding: 12px;
+            color: white;
+            text-decoration: none;
+            border-top: 1px solid rgba(255,255,255,.2);
+        }
+
+        nav a:hover {
+            background: #8b0000;
+        }
+
+
+        /* CONTAINER */
+
+        .container {
+            width: 94%;
+            max-width: 600px;
+            margin: 30px auto;
+        }
+
+
+        /* SIGNUP CARD */
+
+        .signup-card {
+            background: white;
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,.1);
+        }
+
+        .signup-card h1 {
+            text-align: center;
+            color: #b30000;
+            margin-bottom: 8px;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #666;
+            margin-bottom: 25px;
+        }
+
+
+        /* PROFILE PICTURE */
+
+        .profile-section {
+            text-align: center;
+            margin-bottom: 25px;
+        }
+
+        .profile-preview {
+            width: 130px;
+            height: 130px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid #b30000;
+            background: #eee;
+            display: block;
+            margin: 0 auto 12px;
+        }
+
+        .file-label {
+            display: inline-block;
+            background: #b30000;
+            color: white;
+            padding: 10px 15px;
+            border-radius: 7px;
+            cursor: pointer;
+        }
+
+        .file-label:hover {
+            background: #8b0000;
+        }
+
+        #profilePicture {
+            display: none;
+        }
+
+
+        /* FORM */
+
+        label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 6px;
+        }
+
+        input,
+        textarea {
+            width: 100%;
+            padding: 13px;
+            margin-bottom: 16px;
+            border: 1px solid #ccc;
+            border-radius: 7px;
+            font-size: 15px, }
+      select {padding:9px;
+             margin:9px;}
+        textarea {
+            min-height: 90px;
+            resize: vertical;
+        }
+
+
+        /* BUTTON */
+
+        .signup-button {
+            width: 100%;
+            padding: 15px;
+            background: #b30000;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 17px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .signup-button:hover {
+            background: #8b0000;
+        }
+
+        .signup-button:disabled {
+            background: #999;
+        }
+
+
+        /* MESSAGE */
+
+        #message {
+            display: none;
+            padding: 12px;
+            margin-top: 15px;
+            border-radius: 7px;
+            text-align: center;
+        }
+
+
+        /* LOGIN */
+
+        .login-link {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .login-link a {
+            color: #b30000;
+            font-weight: bold;
+            text-decoration: none;
+        }
+
+
+        /* FOOTER */
+
+        footer {
+            background: #222;
+            color: white;
+            text-align: center;
+            padding: 25px;
+            margin-top: 40px;
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<header>
+
+    <div class="header-content">
+
+        <div class="logo">
+            SeBa.sl
+        </div>
+
+        <button
+            class="menu-button"
+            onclick="toggleMenu()">
+
+            ☰
+
+        </button>
+
+    </div>
+
+
+    <nav id="menu">
+
+        <a href="home.html">
+            🏠 Home
+        </a>
+
+        <a href="about.html">
+            ℹ️ About
+        </a>
+
+        <a href="service.html">
+            🛠 Services
+        </a>
+
+        <a href="marketplace.html">
+            🛒 Marketplace
+        </a>
+
+        <a href="contact.html">
+            📞 Contact
+        </a>
+
+        <a href="login.html">
+            🔐 Login
+        </a>
+<a href="portfolio">Portfolio</a>
+      <a href="profile.html">Profile</a>
+    </nav>
+
+</header>
+
+
+
+<div class="container">
+
+    <div class="signup-card">
+
+        <h1>
+            Create Your SeBa.sl Account
+        </h1>
+
+        <p class="subtitle">
+            Join SeBa.sl and connect with people,
+            businesses and customers.
+        </p>
+
+
+
+        <!-- PROFILE PICTURE -->
+
+        <div class="profile-section">
+
+            <img
+                id="profilePreview"
+                class="profile-preview"
+                src="https://via.placeholder.com/130?text=Profile"
+                alt="Profile picture">
+
+            <label
+                class="file-label"
+                for="profilePicture">
+
+                📷 Choose Profile Picture
+
+            </label>
+
+            <input
+                type="file"
+                id="profilePicture"
+                accept="image/*">
+
+        </div>
+
+
+
+        <!-- SIGNUP FORM -->
+
+        <form id="signupForm">
+
+
+            <label>
+                Full Name
+            </label>
+
+            <input
+                type="text"
+                id="fullName"
+                placeholder="Enter your full name"
+                required>
+
+
+
+            <label>
+                Username
+            </label>
+
+            <input
+                type="text"
+                id="username"
+                placeholder="Choose a username"
+                required>
+
+
+
+            <label>
+                Email Address
+            </label>
+
+            <input
+                type="email"
+                id="email"
+                placeholder="example@email.com"
+                required>
+
+
+
+            <label>
+                Phone / WhatsApp
+            </label>
+
+            <input
+                type="tel"
+                id="phone"
+                placeholder="Your phone number"
+                required>
+
+
+
+            <label>
+                Location
+            </label>
+
+            <input
+                type="text"
+                id="location"
+                placeholder="Example: Lumley, Freetown"
+                required>
+
+
+
+            <label>
+                About You
+            </label>
+
+            <textarea
+                id="bio"
+                placeholder="Tell people a little about yourself or your business">
+            </textarea>
+          <header>Gender</header>
+          <select>
+            <option>Male</option>
+          <option>Female</option>
+          
+          </select>
+
+            <label>
+                Password
+            </label>
+
+            <input
+                type="password"
+                id="password"
+                placeholder="Create a password"
+                required
+                minlength="6">
+
+
+
+            <label>
+                Confirm Password
+            </label>
+
+            <input
+                type="password"
+                id="confirmPassword"
+                placeholder="Confirm your password"
+                required>
+
+
+
+            <button
+                type="submit"
+                class="signup-button"
+                id="signupButton">
+
+                🚀 Create Account
+
+            </button>
+
+
+        </form>
+
+
+
+        <div id="message"></div>
+
+
+
+        <div class="login-link">
+
+            Already have an account?
+
+            <a href="login.html">
+                Login here
+            </a>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+
+<footer>
+
+    <h3>
+        SeBa.sl Ltd
+    </h3>
+
+    <p>
+        Connecting businesses and customers.
+    </p>
+
+    <p>
+        © 2026 SeBa.sl Ltd
+    </p>
+
+</footer>
+
+
+
+<script>
+
+
+/* MENU */
+
+function toggleMenu() {
+
+    const menu =
+        document.getElementById("menu");
+
+    if (menu.style.display === "block") {
+
+        menu.style.display = "none";
+
+    } else {
+
+        menu.style.display = "block";
+
+    }
+
+}
+
+
+
+/* PROFILE PREVIEW */
+
+document
+    .getElementById("profilePicture")
+    .addEventListener("change", function(event) {
+
+        const file =
+            event.target.files[0];
+
+        if (!file) return;
+
+        const image =
+            document.getElementById("profilePreview");
+
+        image.src =
+            URL.createObjectURL(file);
+
+    });
+
+
+
+/* MESSAGE */
+
+function showMessage(text, success) {
+
+    const message =
+        document.getElementById("message");
+
+    message.innerText = text;
+
+    message.style.display = "block";
+
+    if (success) {
+
+        message.style.background = "#d4edda";
+        message.style.color = "#155724";
+
+    } else {
+
+        message.style.background = "#f8d7da";
+        message.style.color = "#721c24";
+
+    }
+
+}
+
+
+
+/* UPLOAD PROFILE PICTURE */
+
+async function uploadProfilePicture(file, userId) {
+
+    if (!file) {
+        return null;
+    }
+
+    const fileExtension =
+        file.name.split(".").pop();
+
+    const fileName =
+        userId +
+        "_" +
+        Date.now() +
+        "_" +
+        Math.random()
+            .toString(36)
+            .substring(2) +
+        "." +
+        fileExtension;
+
+    const filePath =
+        "profiles/" + fileName;
+
+    const { error } =
+        await supabaseClient
+            .storage
+            .from("media")
+            .upload(
+                filePath,
+                file
+            );
+
+    if (error) {
+        console.error(error);
+        throw error;
+    }
+
+    const { data } =
+        supabaseClient
+            .storage
+            .from("media")
+            .getPublicUrl(filePath);
+
+    return data.publicUrl;
+
+}
+
+
+
+/* SIGNUP */
+
+document
+    .getElementById("signupForm")
+    .addEventListener(
+        "submit",
+        async function(event) {
+
+            event.preventDefault();
+
+
+            const button =
+                document
+                .getElementById("signupButton");
+
+
+            const fullName =
+                document
+                .getElementById("fullName")
+                .value
+                .trim();
+
+
+            const username =
+                document
+                .getElementById("username")
+                .value
+                .trim();
+
+
+            const email =
+                document
+                .getElementById("email")
+                .value
+                .trim();
+
+
+            const phone =
+                document
+                .getElementById("phone")
+                .value
+                .trim();
+
+
+            const location =
+                document
+                .getElementById("location")
+                .value
+                .trim();
+
+
+            const bio =
+                document
+                .getElementById("bio")
+                .value
+                .trim();
+
+
+            const password =
+                document
+                .getElementById("password")
+                .value;
+
+
+            const confirmPassword =
+                document
+                .getElementById("confirmPassword")
+                .value;
+
+
+            const profileFile =
+                document
+                .getElementById("profilePicture")
+                .files[0];
+
+
+
+            /* PASSWORD CHECK */
+
+            if (password !== confirmPassword) {
+
+                showMessage(
+                    "❌ Passwords do not match.",
+                    false
+                );
+
+                return;
+
+            }
+
+
+            button.disabled = true;
+
+            button.innerText =
+                "Creating account...";
+
+
+            try {
+
+
+                /* CREATE AUTH ACCOUNT */
+
+                const {
+                    data,
+                    error
+                } =
+                    await supabaseClient
+                        .auth
+                        .signUp({
+
+                            email: email,
+
+                            password: password
+
+                        });
+
+
+                if (error) {
+
+                    throw error;
+
+                }
+
+
+                const user =
+                    data.user;
+
+
+                if (!user) {
+
+                    throw new Error(
+                        "Account could not be created."
+                    );
+
+                }
+
+
+
+                /* PROFILE PICTURE */
+
+                let profileUrl = null;
+
+
+                if (profileFile) {
+
+                    profileUrl =
+                        await uploadProfilePicture(
+                            profileFile,
+                            user.id
+                        );
+
+                }
+
+
+
+                /* SAVE PROFILE */
+
+                const {
+                    error: profileError
+                } =
+                    await supabaseClient
+                        .from("profiles")
+                        .upsert({
+
+                            id: user.id,
+
+                            full_name:
+                                fullName,
+
+                            username:
+                                username,
+
+                            phone:
+                                phone,
+
+                            location:
+                                location,
+
+                            bio:
+                                bio,
+
+                            profile_picture:
+                                profileUrl
+
+                        });
+
+
+                if (profileError) {
+
+                    throw profileError;
+
+                }
+
+
+
+                showMessage(
+                    "✅ Account created successfully! You can now post images and videos from the home feed.",
+                    true
+                );
+
+
+                setTimeout(function() {
+
+                    window.location.href =
+                        "index.html";
+
+                }, 2000);
+
+
+            } catch (error) {
+
+                console.error(error);
+
+
+                showMessage(
+                    "❌ " + error.message,
+                    false
+                );
+
+
+                button.disabled = false;
+
+                button.innerText =
+                    "🚀 Create Account";
+
+            }
+
+        });
+
+
+</script>
+
+</body>
+
+</html>

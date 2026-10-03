@@ -1,0 +1,346 @@
+<!DOCTYPE html><html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Services - SeBa.sl Ltd</title>
+
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="supabase.js"></script>
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    body {
+        font-family: Arial, sans-serif;
+        background: #f5f7fa;
+        color: #222;
+    }
+
+    /* HEADER */
+    header {
+        background: #0b5ed7;
+        color: white;
+        padding: 15px 20px;
+        position: sticky;
+        top: 0;
+        z-index: 1000;
+    }
+
+    .header-container {
+        max-width: 1100px;
+        margin: auto;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    .logo {
+        font-size: 25px;
+        font-weight: bold;
+        text-decoration: none;
+        color: white;
+    }
+
+    /* NAVIGATION */
+    nav {
+        display: flex;
+        gap: 20px;
+    }
+
+    nav a {
+        color: white;
+        text-decoration: none;
+        font-size: 16px;
+        font-weight: bold;
+        padding: 8px 10px;
+        border-radius: 5px;
+    }
+
+    nav a:hover {
+        background: white;
+        color: #0b5ed7;
+    }
+
+    /* SERVICES */
+    .services {
+        max-width: 1100px;
+        margin: 50px auto;
+        padding: 20px;
+    }
+
+    .services h1 {
+        text-align: center;
+        color: #0b5ed7;
+        font-size: 36px;
+        margin-bottom: 10px;
+    }
+
+    .intro {
+        text-align: center;
+        font-size: 17px;
+        line-height: 1.7;
+        margin-bottom: 35px;
+    }
+
+    /* SERVICE CARDS */
+    .service-container {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 20px;
+    }
+
+    .service-card {
+        background: white;
+        padding: 25px;
+        border-radius: 12px;
+        text-align: center;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+        transition: 0.3s;
+    }
+
+    .service-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+    }
+
+    .service-icon {
+        font-size: 45px;
+        margin-bottom: 15px;
+    }
+
+    .service-card h2 {
+        color: #0b5ed7;
+        margin-bottom: 12px;
+    }
+
+    .service-card p {
+        line-height: 1.6;
+        font-size: 15px;
+    }
+
+    .service-button {
+        display: inline-block;
+        margin-top: 18px;
+        padding: 10px 18px;
+        background: #0b5ed7;
+        color: white;
+        text-decoration: none;
+        border-radius: 6px;
+        font-weight: bold;
+    }
+
+    .service-button:hover {
+        background: #084298;
+    }
+
+    /* FOOTER */
+    footer {
+        background: #111;
+        color: white;
+        text-align: center;
+        padding: 25px;
+        margin-top: 50px;
+    }
+
+    /* MOBILE */
+    @media (max-width: 800px) {
+
+        .header-container {
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        nav {
+            width: 100%;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 5px;
+        }
+
+        nav a {
+            font-size: 14px;
+            padding: 7px;
+        }
+
+        .service-container {
+            grid-template-columns: 1fr;
+        }
+
+        .services h1 {
+            font-size: 30px;
+        }
+    }
+</style>
+
+</head><body><!-- HEADER -->
+<header>
+    <div class="header-container">
+
+        <a href="home.html" class="logo">
+            SeBa.sl
+        </a>
+
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="about.html">About</a>
+            <a href="service.html">Services</a>
+            <a href="marketplace.html">Marketplace</a>
+            <a href="contact.html">Contact</a>
+          <a href="profile.html">profile</a>
+          <a hred="portfolio.html">portfolio</a>
+        </nav>
+
+    </div>
+</header>
+
+
+<!-- SERVICES SECTION -->
+<section class="services">
+
+    <h1>Our Services</h1>
+
+    <p class="intro">
+        SeBa.sl provides useful business, digital and technical
+        services designed to help individuals and businesses grow.
+    </p>
+
+
+    <div class="service-container">
+
+        <!-- ELECTRICAL -->
+        <div class="service-card">
+
+            <div class="service-icon">⚡</div>
+
+            <h2>Electrical Installation</h2>
+
+            <p>
+                Professional electrical installation services for
+                homes, offices, shops and other business locations.
+            </p>
+
+            <a href="contact.html" class="service-button">
+                Request Service
+            </a>
+
+        </div>
+
+
+        <!-- SOLAR -->
+        <div class="service-card">
+
+            <div class="service-icon">☀️</div>
+
+            <h2>Solar Installation</h2>
+
+            <p>
+                Solar installation solutions designed to help homes
+                and businesses access reliable renewable energy.
+            </p>
+
+            <a href="contact.html" class="service-button">
+                Request Service
+            </a>
+
+        </div>
+
+
+        <!-- PRINTING -->
+        <div class="service-card">
+
+            <div class="service-icon">🖨️</div>
+
+            <h2>Digital Printing</h2>
+
+            <p>
+                Digital printing services for flyers, business
+                materials, advertisements and other promotional
+                designs.
+            </p>
+
+            <a href="contact.html" class="service-button">
+                Request Service
+            </a>
+
+        </div>
+
+
+        <!-- ADVERTISING -->
+        <div class="service-card">
+
+            <div class="service-icon">📢</div>
+
+            <h2>Business Advertising</h2>
+
+            <p>
+                Promote your business, products and services and
+                reach more potential customers through digital
+                advertising.
+            </p>
+
+            <a href="contact.html" class="service-button">
+                Advertise With Us
+            </a>
+
+        </div>
+
+
+        <!-- BUSINESS CONNECTION -->
+        <div class="service-card">
+
+            <div class="service-icon">🤝</div>
+
+            <h2>Business Connection</h2>
+
+            <p>
+                We help connect business owners with potential
+                customers and create opportunities for business
+                growth.
+            </p>
+
+            <a href="contact.html" class="service-button">
+                Get Connected
+            </a>
+
+        </div>
+      
+      
+        
+
+
+        <!-- FUTURE VENTURES -->
+        <div class="service-card">
+
+            <div class="service-icon">🚀</div>
+
+            <h2>Future Ventures</h2>
+
+            <p>
+                SeBa.sl is developing future ventures and innovative
+                solutions that can create more opportunities for
+                communities and businesses.
+            </p>
+
+            <a href="contact.html" class="service-button">
+                Contact Us
+            </a>
+
+        </div>
+
+    </>
+
+</section>
+
+
+<!-- FOOTER -->
+<footer>
+
+    <p>© 2026 SeBa.sl Ltd. All Rights Reserved.</p>
+
+</footer>
+
+</body>
+</html>

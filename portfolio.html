@@ -1,0 +1,1052 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>SeBa.sl Ltd | Portfolio</title>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="supabase.js"></script>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #f4f7fb;
+            color: #222;
+            line-height: 1.6;
+        }
+
+        /* HEADER */
+        header {
+            background: #0b1f3a;
+            color: white;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.2);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: auto;
+            padding: 15px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .logo {
+            font-size: 25px;
+            font-weight: bold;
+        }
+
+        .logo span {
+            color: #00c853;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 8px;
+        }
+
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            padding: 10px 12px;
+            border-radius: 5px;
+            transition: 0.3s;
+        }
+
+        nav ul li a:hover {
+            background: #00c853;
+        }
+
+        .menu-btn {
+            display: none;
+            font-size: 30px;
+            cursor: pointer;
+        }
+
+        /* HERO */
+        .hero {
+            min-height: 90vh;
+            background: linear-gradient(
+                rgba(11,31,58,0.88),
+                rgba(0,100,60,0.80)
+            ),
+            url("images/seba.jpg");
+
+            background-size: cover;
+            background-position: center;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            padding: 30px 20px;
+        }
+
+        .hero-content {
+            max-width: 850px;
+        }
+
+        .hero h1 {
+            font-size: 55px;
+            margin-bottom: 15px;
+        }
+
+        .hero h1 span {
+            color: #00e676;
+        }
+
+        .hero p {
+            font-size: 20px;
+            margin-bottom: 25px;
+        }
+
+        .btn {
+            display: inline-block;
+            background: #00c853;
+            color: white;
+            padding: 13px 25px;
+            border-radius: 6px;
+            text-decoration: none;
+            margin: 5px;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        .btn:hover {
+            background: #009624;
+            transform: translateY(-2px);
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 2px solid white;
+        }
+
+        .btn-outline:hover {
+            background: white;
+            color: #0b1f3a;
+        }
+
+        /* GENERAL SECTIONS */
+        section {
+            padding: 70px 20px;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: auto;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .section-title h2 {
+            color: #0b1f3a;
+            font-size: 35px;
+            margin-bottom: 10px;
+        }
+
+        .section-title .line {
+            width: 70px;
+            height: 4px;
+            background: #00c853;
+            margin: auto;
+        }
+
+        /* ABOUT */
+        .about {
+            background: white;
+        }
+
+        .about-text {
+            text-align: center;
+            max-width: 850px;
+            margin: auto;
+            font-size: 18px;
+        }
+
+        /* MISSION VISION */
+        .mission-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 25px;
+        }
+
+        .mission-card {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+            text-align: center;
+        }
+
+        .mission-card h3 {
+            color: #00a844;
+            margin-bottom: 15px;
+            font-size: 25px;
+        }
+
+        /* SERVICES */
+        .services {
+            background: #eef4f8;
+        }
+
+        .service-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+
+        .service-card {
+            background: white;
+            padding: 30px 20px;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 5px 18px rgba(0,0,0,0.08);
+            transition: 0.3s;
+        }
+
+        .service-card:hover {
+            transform: translateY(-7px);
+        }
+
+        .service-icon {
+            font-size: 40px;
+            margin-bottom: 15px;
+        }
+
+        .service-card h3 {
+            color: #0b1f3a;
+            margin-bottom: 10px;
+        }
+
+        /* MARKETPLACE */
+        .marketplace {
+            background: white;
+            text-align: center;
+        }
+
+        .market-box {
+            background: #0b1f3a;
+            color: white;
+            padding: 45px 25px;
+            border-radius: 12px;
+            max-width: 850px;
+            margin: auto;
+        }
+
+        .market-box h3 {
+            font-size: 28px;
+            margin-bottom: 15px;
+        }
+
+        /* PROJECTS */
+        .project-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+
+        .project-card {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 18px rgba(0,0,0,0.08);
+        }
+
+        .project-card img {
+            width: 100%;
+            height: 210px;
+            object-fit: cover;
+        }
+
+        .project-card div {
+            padding: 20px;
+        }
+
+        /* FOUNDERS */
+        .founders {
+            background: #eef4f8;
+        }
+
+        .founder-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 30px;
+        }
+
+        .founder-card {
+            background: white;
+            padding: 35px 25px;
+            text-align: center;
+            border-radius: 12px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+        }
+
+        .founder-photo {
+            width: 110px;
+            height: 110px;
+            margin: auto;
+            border-radius: 50%;
+            background: #0b1f3a;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 38px;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+        .founder-card h3 {
+            color: #0b1f3a;
+            font-size: 24px;
+        }
+
+        .founder-card .position {
+            color: #00a844;
+            font-weight: bold;
+            margin: 5px 0 15px;
+        }
+
+        /* WHY US */
+        .why-list {
+            max-width: 800px;
+            margin: auto;
+        }
+
+        .why-list div {
+            background: white;
+            margin-bottom: 12px;
+            padding: 18px;
+            border-left: 5px solid #00c853;
+            box-shadow: 0 3px 12px rgba(0,0,0,0.06);
+        }
+
+        /* FUTURE */
+        .future {
+            background: #0b1f3a;
+            color: white;
+            text-align: center;
+        }
+
+        .future .section-title h2 {
+            color: white;
+        }
+
+        .future-list {
+            max-width: 750px;
+            margin: auto;
+        }
+
+        .future-item {
+            background: rgba(255,255,255,0.1);
+            padding: 18px;
+            margin: 10px 0;
+            border-radius: 6px;
+        }
+
+        /* CONTACT */
+        .contact {
+            background: white;
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            text-align: center;
+        }
+
+        .contact-card {
+            padding: 25px;
+            background: #f4f7fb;
+            border-radius: 10px;
+        }
+
+        .contact-card h3 {
+            color: #0b1f3a;
+            margin-bottom: 10px;
+        }
+
+        .contact-card a {
+            color: #00a844;
+            text-decoration: none;
+            word-break: break-word;
+        }
+
+        /* FOOTER */
+        footer {
+            background: #071426;
+            color: white;
+            text-align: center;
+            padding: 30px 20px;
+        }
+
+        footer strong {
+            color: #00e676;
+        }
+
+        /* MOBILE */
+        @media (max-width: 800px) {
+
+            .menu-btn {
+                display: block;
+            }
+
+            nav {
+                display: none;
+                width: 100%;
+            }
+
+            nav.active {
+                display: block;
+            }
+
+            .nav-container {
+                flex-wrap: wrap;
+            }
+
+            nav ul {
+                flex-direction: column;
+                width: 100%;
+                margin-top: 15px;
+            }
+
+            nav ul li a {
+                display: block;
+                padding: 12px;
+            }
+
+            .hero h1 {
+                font-size: 38px;
+            }
+
+            .hero p {
+                font-size: 17px;
+            }
+
+            .mission-grid,
+            .founder-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .service-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .project-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .contact-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<!-- ================= HEADER ================= -->
+
+<header>
+    <div class="nav-container">
+
+        <div class="logo">
+            SeBa.<span>sl</span> Ltd
+        </div>
+
+        <div class="menu-btn" onclick="toggleMenu()">
+            ☰
+        </div>
+
+        <nav id="navigation">
+            <ul>
+                <li><a href="home.html" onclick="closeMenu()">Home</a></li>
+              <li><a href="post.html">Post in feed!</a></li>
+                <li><a href="profile.html" onclick="closeMenu()">profile</a></li>
+                <li><a href="service.html" onclick="closeMenu()">Services</a></li>
+                <li><a href="marketplace.html" onclick="closeMenu()">Marketplace</a></li>
+                <li><a href="#projects.html" onclick="closeMenu()">Projects</a></li>
+                <li><a href="#founders" onclick="closeMenu()">Founders</a></li>
+                <li><a href="#why-us" onclick="closeMenu()">Why Choose Us</a></li>
+                <li><a href="#future" onclick="closeMenu()">Future Ventures</a></li>
+                <li><a href="contact.html" onclick="closeMenu()">Contact</a></li>
+            </ul>
+        </nav>
+
+    </div>
+</header>
+
+
+<!-- ================= HOME ================= -->
+
+<section class="hero" id="home">
+
+    <div class="hero-content">
+
+        <h1>
+            Welcome to <span>SeBa.sl Ltd</span>
+        </h1>
+
+        <p>
+            Innovative solutions, reliable services and opportunities
+            connecting businesses, customers and communities.
+        </p>
+
+        <a href="#services" class="btn">
+            Our Services
+        </a>
+
+        <a href="#contact" class="btn btn-outline">
+            Contact Us
+        </a>
+
+    </div>
+
+</section>
+
+
+<!-- ================= ABOUT ================= -->
+
+<section class="about" id="about">
+
+    <div class="container">
+
+        <div class="section-title">
+            <h2>About Us</h2>
+            <div class="line"></div>
+        </div>
+
+        <div class="about-text">
+
+            <p>
+                <strong>SeBa.sl Ltd</strong> is a growing Sierra Leonean
+                business focused on providing innovative solutions,
+                connecting businesses with customers and creating
+                opportunities through technology and services.
+            </p>
+
+            <br>
+
+            <p>
+                Our goal is to build a trusted platform where businesses,
+                service providers and consumers can connect, discover
+                opportunities and grow together.
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ================= MISSION & VISION ================= -->
+
+<section id="mission">
+
+    <div class="container">
+
+        <div class="section-title">
+            <h2>Our Mission & Vision</h2>
+            <div class="line"></div>
+        </div>
+
+        <div class="mission-grid">
+
+            <div class="mission-card">
+
+                <h3>Our Mission</h3>
+
+                <p>
+                    To provide innovative solutions and useful services
+                    that connect businesses with customers while helping
+                    people and businesses grow through technology,
+                    creativity and reliable services.
+                </p>
+
+            </div>
+
+            <div class="mission-card">
+
+                <h3>Our Vision</h3>
+
+                <p>
+                    To become a trusted Sierra Leonean platform that
+                    connects people, businesses and opportunities while
+                    delivering innovative solutions for the future.
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ================= SERVICES ================= -->
+
+<section class="services" id="services">
+
+    <div class="container">
+
+        <div class="section-title">
+            <h2>Our Services</h2>
+            <div class="line"></div>
+        </div>
+
+        <div class="service-grid">
+
+            <div class="service-card">
+                <div class="service-icon">⚡</div>
+                <h3>Electrical Installation</h3>
+                <p>
+                    Electrical installation and related technical services.
+                </p>
+            </div>
+
+            <div class="service-card">
+                <div class="service-icon">☀️</div>
+                <h3>Solar Installation</h3>
+                <p>
+                    Solar solutions designed to support reliable energy needs.
+                </p>
+            </div>
+
+            <div class="service-card">
+                <div class="service-icon">🖨️</div>
+                <h3>Digital Printing</h3>
+                <p>
+                    Printing and digital design services for businesses
+                    and individuals.
+                </p>
+            </div>
+
+            <div class="service-card">
+                <div class="service-icon">📢</div>
+                <h3>Business Advertising</h3>
+                <p>
+                    Helping businesses promote their products and services.
+                </p>
+            </div>
+
+            <div class="service-card">
+                <div class="service-icon">🤝</div>
+                <h3>Business Connections</h3>
+                <p>
+                    Connecting business owners with potential customers.
+                </p>
+            </div>
+
+            <div class="service-card">
+                <div class="service-icon">💻</div>
+                <h3>Digital Solutions</h3>
+                <p>
+                    Exploring digital solutions that can help businesses
+                    operate and grow.
+                </p>
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ================= MARKETPLACE ================= -->
+
+<section class="marketplace" id="marketplace">
+
+    <div class="container">
+
+        <div class="section-title">
+            <h2>Marketplace</h2>
+            <div class="line"></div>
+        </div>
+
+        <div class="market-box">
+
+            <h3>SeBa.sl Marketplace</h3>
+
+            <p>
+                A place where businesses and individuals can showcase
+                products and services and connect with potential customers.
+            </p>
+
+            <br>
+
+            <!-- Change this link later to your marketplace page -->
+            <a href="marketplace.html" class="btn">
+                Visit Marketplace
+            </a>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ================= PROJECTS ================= -->
+
+<section id="projects">
+
+    <div class="container">
+
+        <div class="section-title">
+            <h2>Our Projects</h2>
+            <div class="line"></div>
+        </div>
+
+        <div class="project-grid">
+
+            <div class="project-card">
+
+                <img src="images/project1.jpg" alt="Electrical Project">
+
+                <div>
+                    <h3>Electrical Projects</h3>
+                    <p>
+                        Electrical installation and technical projects.
+                    </p>
+                </div>
+
+            </div>
+
+
+            <div class="project-card">
+
+                <img src="images/project2.jpg" alt="Solar Project">
+
+                <div>
+                    <h3>Solar Projects</h3>
+                    <p>
+                        Solar installation and renewable energy projects.
+                    </p>
+                </div>
+
+            </div>
+
+
+            <div class="project-card">
+
+                <img src="images/project3.jpg" alt="Digital Project">
+
+                <div>
+                    <h3>Digital Projects</h3>
+                    <p>
+                        Digital printing, advertising and technology projects.
+                    </p>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ================= FOUNDERS ================= -->
+
+<section class="founders" id="founders">
+
+    <div class="container">
+
+        <div class="section-title">
+            <h2>Our Team / Founders</h2>
+            <div class="line"></div>
+        </div>
+
+        <div class="founder-grid">
+
+            <!-- FOUNDER 1 -->
+
+            <div class="founder-card">
+
+                <div class="founder-photo">
+                    BYS
+                </div>
+
+                <h3>Balla Y Sewa</h3>
+
+                <div class="position">
+                    CEO / Founder
+                </div>
+
+                <p>
+                    📞 <a href="tel:073839342">
+                        073839342
+                    </a>
+                </p>
+
+                <p>
+                    📧 <a href="mailto:sewaballay68@gmail.com">
+                        sewaballay68@gmail.com
+                    </a>
+                </p>
+
+            </div>
+
+
+            <!-- FOUNDER 2 -->
+
+            <div class="founder-card">
+
+                <div class="founder-photo">
+                    OM
+                </div>
+
+                <h3>Osman Mansaray</h3>
+
+                <div class="position">
+                    CEO / Co-Founder
+                </div>
+
+                <p>
+                    📞 <a href="tel:033027801">
+                        033 027801
+                    </a>
+                </p>
+
+                <p>
+                    📧 <a href="mailto:elamansaray999@gmail.com">
+                        elamansaray999@gmail.com
+                    </a>
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ================= WHY CHOOSE US ================= -->
+
+<section id="why-us">
+
+    <div class="container">
+
+        <div class="section-title">
+
+            <h2>Why Choose SeBa.sl?</h2>
+
+            <div class="line"></div>
+
+        </div>
+
+        <div class="why-list">
+
+            <div>
+                ✅ Innovative and practical solutions
+            </div>
+
+            <div>
+                ✅ Focus on connecting businesses and customers
+            </div>
+
+            <div>
+                ✅ Reliable and customer-focused services
+            </div>
+
+            <div>
+                ✅ Supporting local businesses and opportunities
+            </div>
+
+            <div>
+                ✅ Building for the future through technology
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ================= FUTURE VENTURES ================= -->
+
+<section class="future" id="future">
+
+    <div class="container">
+
+        <div class="section-title">
+
+            <h2>Future Ventures</h2>
+
+            <div class="line"></div>
+
+        </div>
+
+        <div class="future-list">
+
+            <div class="future-item">
+                🚀 Expansion of SeBa.sl digital services
+            </div>
+
+            <div class="future-item">
+                🏥 Future Medical Venture
+            </div>
+
+            <div class="future-item">
+                💻 New digital business solutions
+            </div>
+
+            <div class="future-item">
+                🌍 Expansion of business connections and opportunities
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ================= CONTACT ================= -->
+
+<section class="contact" id="contact">
+
+    <div class="container">
+
+        <div class="section-title">
+
+            <h2>Contact Us</h2>
+
+            <div class="line"></div>
+
+        </div>
+
+        <div class="contact-grid">
+
+            <div class="contact-card">
+
+                <h3>📞 Phone</h3>
+
+                <p>
+                    <a href="tel:073839342">
+                        073839342
+                    </a>
+                </p>
+
+                <p>
+                    <a href="tel:033027801">
+                        033 027801
+                    </a>
+                </p>
+
+            </div>
+
+
+            <div class="contact-card">
+
+                <h3>📧 Email</h3>
+
+                <p>
+                    <a href="mailto:sewaballay68@gmail.com">
+                        sewaballay68@gmail.com
+                    </a>
+                </p>
+
+            </div>
+
+
+            <div class="contact-card">
+
+                <h3>📍 Location</h3>
+
+                <p>
+                    Freedom, Lumley
+                </p>
+
+            </div>
+
+        </div>
+
+        <br>
+
+        <div style="text-align:center;">
+
+            <a
+                href="https://wa.me/23274062875"
+                target="_blank"
+                class="btn"
+            >
+                WhatsApp Us
+            </a>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ================= FOOTER ================= -->
+
+<footer>
+
+    <p>
+        © 2026 <strong>SeBa.sl Ltd</strong>.
+        All Rights Reserved.
+    </p>
+
+    <p>
+        Built with innovation for Sierra Leone.
+    </p>
+
+</footer>
+
+
+<!-- ================= JAVASCRIPT ================= -->
+
+<script>
+
+    function toggleMenu() {
+
+        const navigation =
+            document.getElementById("navigation");
+
+        navigation.classList.toggle("active");
+
+    }
+
+
+    function closeMenu() {
+
+        const navigation =
+            document.getElementById("navigation");
+
+        navigation.classList.remove("active");
+
+    }
+
+</script>
+
+</body>
+</html>

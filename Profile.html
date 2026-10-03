@@ -1,0 +1,1143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>SeBa.sl Profile</title>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="supabase.js"></script>
+
+<style>
+
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+}
+
+body{
+    font-family:Arial,sans-serif;
+    background:#f0f2f5;
+    color:#222;
+}
+
+.header{
+    background:white;
+    padding:15px 20px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    position:sticky;
+    top:0;
+    z-index:100;
+    box-shadow:0 2px 8px #0002;
+}
+
+.logo{
+    font-size:27px;
+    font-weight:bold;
+    color:#d60000;
+}
+
+.back{
+    text-decoration:none;
+    color:#222;
+    font-weight:bold;
+}
+
+.container{
+    max-width:700px;
+    margin:25px auto;
+    padding:0 15px 100px;
+}
+
+.profile-card{
+    background:white;
+    border-radius:18px;
+    overflow:hidden;
+    box-shadow:0 3px 12px #0002;
+}
+
+.cover{
+    height:180px;
+    background:linear-gradient(135deg,#b00000,#ff3b30);
+}
+
+.profile-area{
+    text-align:center;
+    padding:0 20px 25px;
+}
+
+/* PROFILE PICTURE */
+
+.profile-picture-box{
+    position:relative;
+    width:150px;
+    height:150px;
+    margin:-75px auto 15px;
+}
+
+.profile-picture{
+    width:150px;
+    height:150px;
+    border-radius:50%;
+    object-fit:cover;
+    border:6px solid white;
+    background:#ddd;
+}
+
+/* CAMERA BUTTON */
+
+.camera-button{
+    position:absolute;
+    right:3px;
+    bottom:8px;
+    width:48px;
+    height:48px;
+    border-radius:50%;
+    border:4px solid white;
+    background:#d60000;
+    color:white;
+    font-size:22px;
+    cursor:pointer;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+}
+
+.camera-button:active{
+    transform:scale(.95);
+}
+
+.change-text{
+    color:#d60000;
+    font-weight:bold;
+    margin-bottom:10px;
+}
+
+.profile-name{
+    font-size:27px;
+    font-weight:bold;
+}
+
+.profile-email{
+    color:#777;
+    margin-top:5px;
+}
+
+.form{
+    padding:25px;
+}
+
+label{
+    display:block;
+    font-weight:bold;
+    font-size:17px;
+    margin-top:18px;
+    margin-bottom:7px;
+}
+
+input,
+textarea,
+select{
+    width:100%;
+    border:1px solid #ccc;
+    border-radius:10px;
+    padding:14px;
+    font-size:16px;
+    outline:none;
+    background:white;
+}
+
+textarea{
+    min-height:130px;
+    resize:vertical;
+}
+
+input:focus,
+textarea:focus,
+select:focus{
+    border-color:#d60000;
+}
+
+.save{
+    width:100%;
+    margin-top:25px;
+    padding:16px;
+    border:0;
+    border-radius:10px;
+    background:#d60000;
+    color:white;
+    font-size:17px;
+    font-weight:bold;
+    cursor:pointer;
+}
+
+.save:disabled{
+    opacity:.6;
+}
+
+.logout{
+    width:100%;
+    margin-top:12px;
+    padding:15px;
+    border:1px solid #d60000;
+    border-radius:10px;
+    background:white;
+    color:#d60000;
+    font-size:16px;
+    font-weight:bold;
+}
+
+.message{
+    margin-top:15px;
+    padding:14px;
+    border-radius:10px;
+    display:none;
+}
+
+.success{
+    display:block;
+    background:#d9f7df;
+    color:#166534;
+}
+
+.error{
+    display:block;
+    background:#ffdada;
+    color:#991b1b;
+}
+
+.posts-title{
+    font-size:22px;
+    font-weight:bold;
+    margin:25px 0 12px;
+}
+
+.user-post{
+    background:white;
+    border-radius:15px;
+    padding:15px;
+    margin-bottom:15px;
+}
+
+.user-post img,
+.user-post video{
+    width:100%;
+    max-height:600px;
+    object-fit:contain;
+    background:#000;
+    border-radius:10px;
+}
+
+.post-caption{
+    font-size:16px;
+    margin-bottom:10px;
+    white-space:pre-wrap;
+}
+
+@media(max-width:600px){
+
+    .header{
+        padding:13px;
+    }
+
+    .container{
+        margin-top:10px;
+        padding-left:8px;
+        padding-right:8px;
+    }
+
+    .cover{
+        height:140px;
+    }
+
+    .profile-picture-box{
+        width:130px;
+        height:130px;
+        margin-top:-65px;
+    }
+
+    .profile-picture{
+        width:130px;
+        height:130px;
+    }
+
+    .camera-button{
+        width:44px;
+        height:44px;
+    }
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+
+<header class="header">
+
+    <div class="logo">
+        SeBa.sl
+    </div>
+
+    <a
+        href="Home.html"
+        class="back"
+    >
+        🏠 Home
+    </a>
+
+</header>
+
+
+<div class="container">
+
+    <div class="profile-card">
+
+
+        <!-- COVER -->
+
+        <div class="cover"></div>
+
+
+        <!-- PROFILE -->
+
+        <div class="profile-area">
+
+
+            <!-- CLICKABLE PICTURE -->
+
+            <div class="profile-picture-box">
+
+                <img
+                    id="profilePicture"
+                    class="profile-picture"
+                    src="https://via.placeholder.com/300"
+                    alt="Profile picture"
+                >
+
+
+                <button
+                    type="button"
+                    class="camera-button"
+                    onclick="chooseProfilePicture()"
+                >
+                    📷
+                </button>
+
+            </div>
+
+
+            <div class="change-text">
+                Tap 📷 to change profile picture
+            </div>
+
+
+            <div
+                id="displayName"
+                class="profile-name"
+            >
+                Loading...
+            </div>
+
+
+            <div
+                id="displayEmail"
+                class="profile-email"
+            >
+            </div>
+
+
+        </div>
+
+
+        <!-- FORM -->
+
+        <div class="form">
+
+
+            <!-- HIDDEN FILE -->
+
+            <input
+                type="file"
+                id="profilePictureInput"
+                accept="image/*"
+                hidden
+            >
+
+
+            <label>
+                Full Name
+            </label>
+
+            <input
+                id="fullName"
+                type="text"
+                placeholder="Your full name"
+            >
+
+
+            <label>
+                Phone
+            </label>
+
+            <input
+                id="phone"
+                type="tel"
+                placeholder="Your phone number"
+            >
+
+
+            <label>
+                Location
+            </label>
+
+            <input
+                id="location"
+                type="text"
+                placeholder="Example: Freetown"
+            >
+
+
+            <label>
+                About You
+            </label>
+
+            <textarea
+                id="bio"
+                placeholder="Tell people about yourself..."
+            ></textarea>
+
+
+            <label>
+                Gender
+            </label>
+
+            <select id="gender">
+
+                <option value="">
+                    Select gender
+                </option>
+
+                <option value="Male">
+                    Male
+                </option>
+
+                <option value="Female">
+                    Female
+                </option>
+
+                <option value="Other">
+                    Other
+                </option>
+
+            </select>
+
+
+            <button
+                class="save"
+                id="saveButton"
+                onclick="saveProfile()"
+            >
+                💾 Save Profile
+            </button>
+
+
+            <div
+                id="message"
+                class="message"
+            ></div>
+
+<div>
+            <button
+    type="button"
+    class="logout"
+    id="logoutButton"
+
+    🚪 Logout
+            </button>
+                
+              
+            
+              
+
+    </div>
+
+
+    <!-- USER POSTS -->
+
+    <div class="posts-title">
+        📱 Your Moments
+    </div>
+
+    <div id="userPosts">
+        Loading your moments...
+    </div>
+
+</div>
+
+
+<script>
+
+let currentUser = null;
+
+let currentProfile = null;
+
+let selectedProfilePicture = null;
+
+
+/* =========================================
+   START
+========================================= */
+
+async function startProfile(){
+
+    try{
+
+        const result =
+            await supabase.auth.getUser();
+
+
+        if(
+            result.error ||
+            !result.data ||
+            !result.data.user
+        ){
+
+            window.location.href =
+                "login.html";
+
+            return;
+        }
+
+
+        currentUser =
+            result.data.user;
+
+
+        document
+        .getElementById("displayEmail")
+        .textContent =
+            currentUser.email;
+
+
+        await loadProfile();
+
+        await loadUserPosts();
+
+
+    }catch(error){
+
+        showMessage(
+            error.message,
+            "error"
+        );
+
+    }
+
+}
+
+
+/* =========================================
+   LOAD PROFILE
+========================================= */
+
+async function loadProfile(){
+
+    const result =
+        await supabase
+        .from("profiles")
+        .select("*")
+        .eq(
+            "id",
+            currentUser.id
+        )
+        .maybeSingle();
+
+
+    if(result.error){
+
+        throw result.error;
+
+    }
+
+
+    currentProfile =
+        result.data;
+
+
+    if(!currentProfile){
+
+        document
+        .getElementById("displayName")
+        .textContent =
+            "New SeBa User";
+
+        return;
+
+    }
+
+
+    document
+    .getElementById("fullName")
+    .value =
+        currentProfile.full_name || "";
+
+
+    document
+    .getElementById("phone")
+    .value =
+        currentProfile.phone || "";
+
+
+    document
+    .getElementById("location")
+    .value =
+        currentProfile.location || "";
+
+
+    document
+    .getElementById("bio")
+    .value =
+        currentProfile.bio || "";
+
+
+    document
+    .getElementById("gender")
+    .value =
+        currentProfile.gender || "";
+
+
+    document
+    .getElementById("displayName")
+    .textContent =
+        currentProfile.full_name ||
+        "New SeBa User";
+
+
+    if(currentProfile.avatar_url){
+
+        document
+        .getElementById("profilePicture")
+        .src =
+            currentProfile.avatar_url;
+
+    }
+
+}
+
+
+/* =========================================
+   CHOOSE PICTURE
+========================================= */
+
+function chooseProfilePicture(){
+
+    document
+    .getElementById("profilePictureInput")
+    .click();
+
+}
+
+
+/* =========================================
+   PICTURE SELECTED
+========================================= */
+
+document
+.getElementById("profilePictureInput")
+.addEventListener(
+    "change",
+    function(){
+
+        const file =
+            this.files[0];
+
+
+        if(!file){
+
+            return;
+
+        }
+
+
+        if(
+            !file.type.startsWith("image/")
+        ){
+
+            alert(
+                "Please select an image."
+            );
+
+            return;
+
+        }
+
+
+        selectedProfilePicture =
+            file;
+
+
+        /* SHOW IMMEDIATELY */
+
+        const preview =
+            URL.createObjectURL(file);
+
+
+        document
+        .getElementById("profilePicture")
+        .src =
+            preview;
+
+
+        showMessage(
+            "Picture selected. Tap Save Profile to save it.",
+            "success"
+        );
+
+    }
+);
+
+
+/* =========================================
+   SAVE PROFILE
+========================================= */
+
+async function saveProfile(){
+
+    const button =
+        document.getElementById(
+            "saveButton"
+        );
+
+
+    button.disabled = true;
+
+    button.textContent =
+        "Saving...";
+
+
+    try{
+
+
+        let avatarUrl =
+            currentProfile?.avatar_url ||
+            null;
+
+
+        /* =====================================
+           UPLOAD NEW PICTURE
+        ===================================== */
+
+        if(selectedProfilePicture){
+
+            const extension =
+                selectedProfilePicture.name
+                .split(".")
+                .pop()
+                .toLowerCase();
+
+
+            const filePath =
+                currentUser.id +
+                "/profile." +
+                extension;
+
+
+            const upload =
+                await supabase.storage
+                .from("profile-pictures")
+                .upload(
+                    filePath,
+                    selectedProfilePicture,
+                    {
+                        upsert:true,
+                        cacheControl:"3600"
+                    }
+                );
+
+
+            if(upload.error){
+
+                throw new Error(
+                    "Picture upload failed: " +
+                    upload.error.message
+                );
+
+            }
+
+
+            const publicUrl =
+                supabase.storage
+                .from("profile-pictures")
+                .getPublicUrl(
+                    filePath
+                );
+
+
+            avatarUrl =
+                publicUrl.data.publicUrl;
+
+
+            /* CACHE BUSTER */
+
+            avatarUrl +=
+                "?v=" +
+                Date.now();
+
+        }
+
+
+        /* =====================================
+           PROFILE INFORMATION
+        ===================================== */
+
+        const profileData = {
+
+            id:
+                currentUser.id,
+
+            full_name:
+                document
+                .getElementById("fullName")
+                .value
+                .trim(),
+
+            phone:
+                document
+                .getElementById("phone")
+                .value
+                .trim(),
+
+            location:
+                document
+                .getElementById("location")
+                .value
+                .trim(),
+
+            bio:
+                document
+                .getElementById("bio")
+                .value
+                .trim(),
+
+            gender:
+                document
+                .getElementById("gender")
+                .value,
+
+            avatar_url:
+                avatarUrl,
+
+            updated_at:
+                new Date().toISOString()
+
+        };
+
+
+        /* =====================================
+           SAVE TO DATABASE
+        ===================================== */
+
+        const result =
+            await supabase
+            .from("profiles")
+            .upsert(
+                profileData
+            );
+
+
+        if(result.error){
+
+            throw new Error(
+                "Profile save failed: " +
+                result.error.message
+            );
+
+        }
+
+
+        currentProfile =
+            profileData;
+
+
+        selectedProfilePicture =
+            null;
+
+
+        document
+        .getElementById("displayName")
+        .textContent =
+            profileData.full_name ||
+            "New SeBa User";
+
+
+        showMessage(
+            "Profile saved successfully!",
+            "success"
+        );
+
+
+    }catch(error){
+
+        console.error(error);
+
+
+        showMessage(
+            error.message,
+            "error"
+        );
+
+
+    }finally{
+
+        button.disabled = false;
+
+        button.textContent =
+            "💾 Save Profile";
+
+    }
+
+}
+
+
+/* =========================================
+   LOAD USER POSTS
+========================================= */
+
+async function loadUserPosts(){
+
+    const box =
+        document.getElementById(
+            "userPosts"
+        );
+
+
+    const result =
+        await supabase
+        .from("posts")
+        .select("*")
+        .eq(
+            "user_id",
+            currentUser.id
+        )
+        .order(
+            "created_at",
+            {
+                ascending:false
+            }
+        );
+
+
+    if(result.error){
+
+        box.textContent =
+            result.error.message;
+
+        return;
+
+    }
+
+
+    if(!result.data.length){
+
+        box.innerHTML =
+            `
+            <div class="user-post">
+                You have not posted any moments yet.
+            </div>
+            `;
+
+        return;
+
+    }
+
+
+    box.innerHTML = "";
+
+
+    result.data.forEach(
+        post => {
+
+            const div =
+                document.createElement(
+                    "div"
+                );
+
+
+            div.className =
+                "user-post";
+
+
+            let media = "";
+
+
+            if(
+                post.media_type === "image" &&
+                post.media_url
+            ){
+
+                media =
+                    `
+                    <img
+                        src="${post.media_url}"
+                    >
+                    `;
+
+            }
+
+
+            if(
+                post.media_type === "video" &&
+                post.media_url
+            ){
+
+                media =
+                    `
+                    <video
+                        controls
+                        playsinline
+                    >
+
+                        <source
+                            src="${post.media_url}"
+                        >
+
+                    </video>
+                    `;
+
+            }
+
+
+            div.innerHTML = `
+
+                ${
+                    post.caption
+                    ?
+                    `
+                    <div class="post-caption">
+                        ${escapeHTML(post.caption)}
+                    </div>
+                    `
+                    :
+                    ""
+                }
+
+                ${media}
+
+            `;
+
+
+            box.appendChild(div);
+
+        }
+    );
+
+}
+
+
+/* =========================================
+   MESSAGE
+========================================= */
+
+function showMessage(
+    text,
+    type
+){
+
+    const box =
+        document.getElementById(
+            "message"
+        );
+
+
+    box.textContent =
+        text;
+
+
+    box.className =
+        "message " +
+        type;
+
+}
+
+
+/* =========================================
+   LOGOUT
+========================================= */
+
+document
+.getElementById("logoutButton")
+.addEventListener("click", async function(){
+
+    const button = this;
+
+    button.disabled = true;
+    button.textContent = "Logging out...";
+
+    try {
+
+        const { error } =
+            await supabase.auth.signOut();
+
+        if(error){
+            throw error;
+        }
+
+        window.location.href = "login.html";
+
+    } catch(error){
+
+        console.error("Logout error:", error);
+
+        button.disabled = false;
+        button.textContent = "🚪 Logout";
+
+        showMessage(
+            "Logout failed: " + error.message,
+            "error"
+        );
+    }
+
+});
+    
+
+
+
+
+/* =========================================
+   ESCAPE HTML
+========================================= */
+
+function escapeHTML(text){
+
+    const div =
+        document.createElement(
+            "div"
+        );
+
+    div.textContent =
+        text || "";
+
+    return div.innerHTML;
+
+}
+
+
+/* =========================================
+   START
+========================================= */
+
+startProfile();
+
+</script>
+
+</body>
+</html>

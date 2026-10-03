@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>SeBa.sl - Login</title>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="supabase.js"></script>
+
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f4f4f4;
+        }
+
+        .login-container {
+            width: 90%;
+            max-width: 400px;
+            margin: 80px auto;
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.15);
+            box-sizing: border-box;
+        }
+
+        h1 {
+            text-align: center;
+            color: #d40000;
+            margin-bottom: 10px;
+        }
+
+        .welcome {
+            text-align: center;
+            color: #666;
+            margin-bottom: 25px;
+        }
+
+        label {
+            display: block;
+            margin-top: 15px;
+            margin-bottom: 6px;
+            font-weight: bold;
+        }
+
+        input {
+            width: 100%;
+            padding: 13px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            box-sizing: border-box;
+            font-size: 16px;
+        }
+
+        button {
+            width: 100%;
+            padding: 14px;
+            margin-top: 25px;
+            background: #d40000;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 17px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #a90000;
+        }
+
+        #message {
+            text-align: center;
+            margin-top: 15px;
+            font-weight: bold;
+        }
+
+        .signup-link {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .signup-link a {
+            color: #d40000;
+            text-decoration: none;
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="login-container">
+
+        <h1>SeBa.sl</h1>
+
+        <p class="welcome">Login to your account</p>
+
+        <form id="loginForm">
+
+            <label for="email">Email</label>
+
+            <input
+                type="email"
+                id="email"
+                placeholder="Enter your email"
+                required
+            >
+
+            <label for="password">Password</label>
+
+            <input
+                type="password"
+                id="password"
+                placeholder="Enter your password"
+                required
+            >
+
+            <button type="submit">Login</button>
+
+        </form>
+
+        <p id="message"></p>
+
+        <div class="signup-link">
+            Don't have an account?
+            <a href="signup.html">Create Account</a>
+        </div>
+
+    </div>
+
+      <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+
+<script src="signup.js"></scrip>
+
+    <script>
+
+  
+  
+  
+  <script>
+
+  
+    const loginForm = document.getElementById("loginForm");
+const message = document.getElementById("message");
+
+loginForm.addEventListener("submit", async function(event) {
+    event.preventDefault();
+
+    const email = document.getElementById("email").value;
+    const password = document.getElementById("password").value;
+
+    message.textContent = "Logging in...";
+    message.style.color = "black";
+
+    const { data, error } = await supabase.auth.signInWithPassword({
+        email: email,
+        password: password
+    });
+
+    if (error) {
+        message.textContent = error.message;
+        message.style.color = "red";
+        return;
+    }
+
+    message.textContent = "Login successful!";
+    message.style.color = "green";
+
+    setTimeout(function() {
+        window.location.href = "home.html";
+    }, 1000);
+});</>
+  
+
+</body>
+</html>
